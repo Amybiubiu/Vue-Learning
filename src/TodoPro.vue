@@ -20,6 +20,7 @@
         @clear="clearTask(index)"
         @complete="completeTask"
         :item="item"
+        :index="index"
         :key="item.task"
         />
     </div>
@@ -73,6 +74,7 @@ export default {
     addTask(){
       if(this.newTask){
         this.list.push({task: this.newTask, done: false})
+        this.newTask = ''
       }
     },
     clearCompleted(){
@@ -84,7 +86,9 @@ export default {
     clearTask(index){
       this.list = this.list.filter((item, i) => i != index)
     },
-    completeTask(index){
+    completeTask(props){
+      // console.log('line 89',props)
+      let index = props
       this.list[index].done = !this.list[index].done
     }
   }
@@ -98,6 +102,22 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 60px auto 0;
+  width: fit-content;
+
+}
+.input-todo{
+  display: flex;
+  margin: 10px 0;
+}
+.add-btn{
+  margin-left: 50px;
+}
+.clear{
+  margin: 20px 0;
+  display: flex;
+}
+.clear-completed{
+  margin-right: 50px;
 }
 </style>
